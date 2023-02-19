@@ -1,4 +1,6 @@
-﻿using System.Windows;
+﻿using ControlzEx.Standard;
+using System.Web.UI;
+using System.Windows;
 using System.Windows.Input;
 
 namespace PurchasingDepartment.CustomControls
@@ -57,19 +59,60 @@ namespace PurchasingDepartment.CustomControls
             }
         }
 
-        private void UserControl_MouseDown(object sender, MouseButtonEventArgs e)
+        private void TitleBar_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
             var window = Window.GetWindow(this);
-            if (window != null)
-                window.DragMove();
+            window.ReleaseMouseCapture();
         }
 
-        private void UserControl_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        private void TitleBar_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.ClickCount == 2)
+            {
+                ExpandButton_Click(sender, e);
+            }
+            else
+            {
+                var window = Window.GetWindow(this);
+                window.DragMove();
+            }
+        }
+
+        private void TitleBar_MouseMove(object sender, MouseEventArgs e)
         {
             var window = Window.GetWindow(this);
-            if (window != null && sender is CustomTitleBar titleBar)
-                if (!titleBar.ExpandIconHidden)
-                    window.WindowState = window.WindowState is WindowState.Maximized ? WindowState.Normal : WindowState.Maximized;
+            if (e.LeftButton == MouseButtonState.Pressed && window.WindowState == WindowState.Maximized && e.LeftButton != MouseButtonState.Released)
+            {
+                window.WindowState = WindowState.Normal;
+                window.Left = e.GetPosition(window).X - window.Width / 2;
+                window.Top = e.GetPosition(window).Y - 20;
+                window.DragMove();
+            }
+        }
+
+        private void CloseButton_Click(object sender, RoutedEventArgs e)
+        {
+            var window = Window.GetWindow(this);
+            window.Close();
+        }
+
+        private void ExpandButton_Click(object sender, RoutedEventArgs e)
+        {
+            var window = Window.GetWindow(this);
+            if (window.WindowState == WindowState.Maximized)
+            {
+                window.WindowState = WindowState.Normal;
+            }
+            else
+            {
+                window.WindowState = WindowState.Maximized;
+            }
+        }
+
+        private void MinimizeButton_Click(object sender, RoutedEventArgs e)
+        {
+            var window = Window.GetWindow(this);
+            window.WindowState|= WindowState.Minimized;
         }
     }
 }

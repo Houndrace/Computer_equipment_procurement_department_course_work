@@ -12,9 +12,10 @@
         Height="430" 
         MinWidth="290"
         Width="290"
+        ResizeMode="CanResizeWithGrip"
+        WindowStyle="None"
         WindowStartupLocation="CenterScreen"
-        ResizeMode="NoResize"
-        Style="{DynamicResource CustomWindowStyle}">
+        Style="{DynamicResource CustomWindow}">
     <!--Context-->
     <Window.DataContext>
         <viewmodel:LoginViewModel/>
@@ -24,22 +25,19 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="ResourseDictionaries/LoginFormResourses.xaml"/>
-                <ResourceDictionary Source="ResourseDictionaries/CustomWindowStyle.xaml"/>
+                <ResourceDictionary Source="Styles/CustomWindow.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Window.Resources>
     <!--Interface-->
-    <Grid>
+    <Grid MaxHeight="430" >
 
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="35"/>
             <RowDefinition Height="100"/>
             <RowDefinition Height="5*"/>
             <RowDefinition />
         </Grid.RowDefinitions>
-        <!--Titlebar-->
-        <customcontrols:CustomTitleBar ExpandIconHidden="True"
-                                       MinimizeIconHidden="True"/>
         <!--Header-->
         <!--ДОбавить перетяжку за хедер путем создания общей команды-->
         <TextBlock Text="Авторизация"

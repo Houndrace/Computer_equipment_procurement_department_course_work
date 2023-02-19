@@ -7,12 +7,12 @@
              xmlns:comcomands="clr-namespace:PurchasingDepartment.CommonComands"
              xmlns:view="clr-namespace:PurchasingDepartment.Views"
              mc:Ignorable="d" 
+             x:Name="TitleBar"
              d:DesignHeight="450" d:DesignWidth="800" 
-             MouseDown="UserControl_MouseDown" MouseDoubleClick="UserControl_MouseDoubleClick">
-    <!--Context commands-->
-    <UserControl.DataContext>
-        <comcomands:CommonComands/>
-    </UserControl.DataContext>
+             VerticalAlignment="Top"
+             MouseMove="TitleBar_MouseMove" 
+             MouseLeftButtonDown="TitleBar_MouseLeftButtonDown"
+             MouseLeftButtonUp="TitleBar_MouseLeftButtonUp">
     <!--Title bar resourses-->
     <UserControl.Resources>
         <Style x:Key="MinimizeButtonStyle"
@@ -20,11 +20,18 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type Button}">
-                        <Image x:Name="ButtonImage" 
-                               Source="/PurchasingDepartment;component/Images/MinimizeInactiveIcon.png"/>
+                        <Grid Background="Transparent"
+                              Width="25"
+                              Height="35">
+                            <Image x:Name="ButtonImage" 
+                                   Source="/PurchasingDepartment;component/Images/MinimizeInactive.png"
+                                   MaxWidth="8"
+                                   MaxHeight="3"
+                                   Margin="15 24 0 8"/>
+                        </Grid>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
-                                <Setter TargetName="ButtonImage" Property="Source" Value="/PurchasingDepartment;component/Images/MinimizeActiveIcon.png"/>
+                                <Setter TargetName="ButtonImage" Property="Source" Value="/PurchasingDepartment;component/Images/MinimizeActive.png"/>
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
@@ -38,17 +45,31 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type Button}">
-                        <Image x:Name="ButtonImage" 
-                               Source="/PurchasingDepartment;component/Images/ExpandInactiveIcon.png"/>
+                        <Grid Background="Transparent"
+                              Width="30"
+                              Height="35">
+                            <Image x:Name="ButtonImage" 
+                                   Source="/PurchasingDepartment;component/Images/ExpandInactive.png"
+                                   MaxWidth="10"
+                                   MaxHeight="9"
+                                   Margin="0 18 0 8"/>
+                        </Grid>
                         <ControlTemplate.Triggers>
-                            <Trigger Property="IsMouseOver" Value="True">
-                                <Setter TargetName="ButtonImage" Property="Source" Value="/PurchasingDepartment;component/Images/ExpandActiveIcon.png"/>
-                            </Trigger>
-
-                            <DataTrigger Binding="{Binding Path=WindowState, 
-                                RelativeSource={RelativeSource AncestorType={x:Type Window}}}" Value="Maximized">
-                                <Setter TargetName="ButtonImage" Property="Source" Value="/PurchasingDepartment;component/Images/MinimizeInactiveIcon.png"/>
+                            <DataTrigger Binding="{Binding IsMouseOver, RelativeSource={RelativeSource Mode=Self}}" Value="True">
+                            <Setter TargetName="ButtonImage" Property="Source" Value="/PurchasingDepartment;component/Images/ExpandActive.png"/>
                             </DataTrigger>
+
+                            <DataTrigger Binding="{Binding Path=WindowState, RelativeSource={RelativeSource AncestorType={x:Type Window}}}" Value="Maximized">
+                                <Setter TargetName="ButtonImage" Property="Source" Value="/PurchasingDepartment;component/Images/ExpandedInactive.png"/>
+                            </DataTrigger>
+
+                            <MultiDataTrigger>
+                                <MultiDataTrigger.Conditions>
+                                    <Condition Binding="{Binding Path=WindowState, RelativeSource={RelativeSource AncestorType={x:Type Window}}}" Value="Maximized"/>
+                                    <Condition Binding="{Binding IsMouseOver, RelativeSource={RelativeSource Mode=Self}}" Value="True"/>
+                                </MultiDataTrigger.Conditions>
+                                <Setter TargetName="ButtonImage" Property="Source" Value="/PurchasingDepartment;component/Images/ExpandedActive.png"/>
+                            </MultiDataTrigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
                 </Setter.Value>
@@ -60,11 +81,19 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type Button}">
-                        <Image x:Name="ButtonImage" 
-                               Source="/PurchasingDepartment;component/Images/CloseInactiveIcon.png"/>
+                        <Grid Background="Transparent"
+                              Width="30"
+                              Height="35">
+                            <Image x:Name="ButtonImage" 
+                                   Source="/PurchasingDepartment;component/Images/CloseInactive.png"
+                                   MaxWidth="9"
+                                   MaxHeight="9"
+                                   Margin="2 18 15 8"/>
+                        </Grid>
+                        
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
-                                <Setter TargetName="ButtonImage" Property="Source" Value="/PurchasingDepartment;component/Images/CloseActiveIcon.png"/>
+                                <Setter TargetName="ButtonImage" Property="Source" Value="/PurchasingDepartment;component/Images/CloseActive.png"/>
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
@@ -75,8 +104,7 @@
     </UserControl.Resources>
     <!--Interface-->
     <Grid Name="grdTitleBar"
-          Height="30" 
-          VerticalAlignment="Top" 
+          Height="35" 
           Background="Transparent">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
@@ -89,16 +117,15 @@
             <!--Перетянуть отсюда команду-->
             <Button Name="MinimizeButton"
                     Style="{DynamicResource MinimizeButtonStyle}"
-                    
-                    Command="{Binding MinimizeCommand}"/>
+                    Click="MinimizeButton_Click"/>
 
             <Button Name="ExpandButton"
                     Style="{DynamicResource ExpandButtonStyle}"
-                    Command="{Binding ExpandCommand}"/>
+                    Click="ExpandButton_Click"/>
 
             <Button Name="CloseButton"
                     Style="{DynamicResource CloseButtonStyle}"
-                    Command="{Binding CloseCommand}"/>
+                    Click="CloseButton_Click"/>
         </StackPanel>
     </Grid>
 </UserControl>
