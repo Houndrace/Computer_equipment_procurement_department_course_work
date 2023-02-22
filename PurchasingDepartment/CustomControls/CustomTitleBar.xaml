@@ -9,7 +9,7 @@
              mc:Ignorable="d" 
              x:Name="TitleBar"
              d:DesignHeight="450" d:DesignWidth="800" 
-             VerticalAlignment="Top"
+
              MouseMove="TitleBar_MouseMove" 
              MouseLeftButtonDown="TitleBar_MouseLeftButtonDown"
              MouseLeftButtonUp="TitleBar_MouseLeftButtonUp">
@@ -82,7 +82,7 @@
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type Button}">
                         <Grid Background="Transparent"
-                              Width="30"
+                              Width="35"
                               Height="35">
                             <Image x:Name="ButtonImage" 
                                    Source="/PurchasingDepartment;component/Images/CloseInactive.png"
@@ -104,7 +104,7 @@
     </UserControl.Resources>
     <!--Interface-->
     <Grid Name="grdTitleBar"
-          Height="35" 
+          Height="38" 
           Background="Transparent">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>

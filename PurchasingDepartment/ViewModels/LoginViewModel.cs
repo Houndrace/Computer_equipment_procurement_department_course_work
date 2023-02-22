@@ -1,7 +1,11 @@
 ﻿using PurchasingDepartment.CommonComands;
 using PurchasingDepartment.Models.DataBase;
+using PurchasingDepartment.Views;
+using System.Web.UI;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Navigation;
 
 namespace PurchasingDepartment.ViewModels
 {
@@ -20,9 +24,11 @@ namespace PurchasingDepartment.ViewModels
                 var isUserExists = user.Authenticate();
                 if (isUserExists)
                 {
+                    ErrorMessage = "";
                     // Новое окно
-                    Window window = new Window();
-                    window.Show();
+                    MainWindow mainWindow = new MainWindow();
+                    Application.Current.Windows[0].Close();
+                    mainWindow.Show();
                 }
                 else
                 {

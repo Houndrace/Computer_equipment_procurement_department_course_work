@@ -112,7 +112,7 @@ namespace PurchasingDepartment.CustomControls
         private void MinimizeButton_Click(object sender, RoutedEventArgs e)
         {
             var window = Window.GetWindow(this);
-            window.WindowState|= WindowState.Minimized;
+            window.WindowState = WindowState.Minimized;
         }
     }
 }

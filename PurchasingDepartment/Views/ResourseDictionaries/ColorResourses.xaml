@@ -2,10 +2,12 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <SolidColorBrush x:Key="WindowBackground" Color="#171A21"/>
     <SolidColorBrush x:Key="WindowBorder" Color="#16191c"/>
+   
     <LinearGradientBrush x:Key="WindowBackground1" EndPoint="0,1" StartPoint="0,0">
         <GradientStop Color="#FF212328"/>
         <GradientStop Color="#FF1A1B1E" Offset="1"/>
     </LinearGradientBrush>
+    
     <LinearGradientBrush x:Key="ButtonBackground">
         <GradientStop Color="#FF58BFF7" Offset="0"/>
         <GradientStop Color="#FF4D90F2" Offset="0.5"/>
@@ -22,6 +24,9 @@
         <GradientStop Color="#FF4185F8" Offset="1"/>
     </LinearGradientBrush>
 
+
+    <SolidColorBrush x:Key="DefaultText" Color="#AFAFAF"/>
+    
     <SolidColorBrush x:Key="TextBoxBackground" Color="#FF2E3035"/>
     <SolidColorBrush x:Key="TextBoxHover" Color="#FF393C43"/>
     <!--Error color-->
