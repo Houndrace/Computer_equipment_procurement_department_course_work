@@ -1,6 +1,6 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
-                    xmlns:convertor="clr-namespace:PurchasingDepartment.Convertors"
+                    xmlns:convertor="clr-namespace:PurchasingDepartment.Converters"
                     xmlns:customcontrol="clr-namespace:PurchasingDepartment.CustomControls">
     <Style TargetType="{x:Type Button}"
                x:Key="CustomButton">
@@ -75,9 +75,7 @@
         </Setter>
     </Style>
 
-    
-
-    <Style x:Key="CustomTextBlock"
+    <Style x:Key="ErrorTextBlock"
            TargetType="{x:Type TextBlock}">
         <Setter Property="Foreground" Value="{StaticResource ErrorForeground}"/>
         <Setter Property="TextWrapping" Value="Wrap"/>

@@ -3,16 +3,9 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:PurchasingDepartment.CustomControls"
-             xmlns:comcomands="clr-namespace:PurchasingDepartment.CommonComands"
-             xmlns:view="clr-namespace:PurchasingDepartment.Views"
              mc:Ignorable="d" 
              x:Name="TitleBar"
-             d:DesignHeight="450" d:DesignWidth="800" 
-             VerticalAlignment="Top"
-             MouseMove="TitleBar_MouseMove" 
-             MouseLeftButtonDown="TitleBar_MouseLeftButtonDown"
-             MouseLeftButtonUp="TitleBar_MouseLeftButtonUp">
+             d:DesignHeight="450" d:DesignWidth="800" >
     <!--Title bar resourses-->
     <UserControl.Resources>
         <Style x:Key="MinimizeButtonStyle"
@@ -27,7 +20,7 @@
                                    Source="/PurchasingDepartment;component/Images/MinimizeInactive.png"
                                    MaxWidth="8"
                                    MaxHeight="3"
-                                   Margin="15 24 0 8"/>
+                                   Margin="10 25 0 6"/>
                         </Grid>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
@@ -52,7 +45,7 @@
                                    Source="/PurchasingDepartment;component/Images/ExpandInactive.png"
                                    MaxWidth="10"
                                    MaxHeight="9"
-                                   Margin="0 18 0 8"/>
+                                   Margin="3 19 0 6"/>
                         </Grid>
                         <ControlTemplate.Triggers>
                             <DataTrigger Binding="{Binding IsMouseOver, RelativeSource={RelativeSource Mode=Self}}" Value="True">
@@ -82,15 +75,15 @@
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type Button}">
                         <Grid Background="Transparent"
-                              Width="30"
+                              Width="35"
                               Height="35">
                             <Image x:Name="ButtonImage" 
                                    Source="/PurchasingDepartment;component/Images/CloseInactive.png"
                                    MaxWidth="9"
                                    MaxHeight="9"
-                                   Margin="2 18 15 8"/>
+                                   Margin="0 19 15 6"/>
                         </Grid>
-                        
+
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
                                 <Setter TargetName="ButtonImage" Property="Source" Value="/PurchasingDepartment;component/Images/CloseActive.png"/>
@@ -100,31 +93,35 @@
                 </Setter.Value>
             </Setter>
         </Style>
-
     </UserControl.Resources>
     <!--Interface-->
     <Grid Name="grdTitleBar"
-          Height="35" 
-          Background="Transparent">
+          Height="35">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
-        <!--Будет дополняться-->
+        <TextBlock Text="Отдел закупок"
+                   Foreground="{StaticResource SecondaryText}"
+                   HorizontalAlignment="Left"
+                   VerticalAlignment="Center"
+                   Margin="15 8 0 0"/>
         <StackPanel Orientation="Horizontal"
                     HorizontalAlignment="Right"
                     Grid.Column="1">
-            <!--Перетянуть отсюда команду-->
             <Button Name="MinimizeButton"
                     Style="{DynamicResource MinimizeButtonStyle}"
+                    WindowChrome.IsHitTestVisibleInChrome="True"
                     Click="MinimizeButton_Click"/>
 
             <Button Name="ExpandButton"
                     Style="{DynamicResource ExpandButtonStyle}"
+                    WindowChrome.IsHitTestVisibleInChrome="True"
                     Click="ExpandButton_Click"/>
 
             <Button Name="CloseButton"
                     Style="{DynamicResource CloseButtonStyle}"
+                    WindowChrome.IsHitTestVisibleInChrome="True"
                     Click="CloseButton_Click"/>
         </StackPanel>
     </Grid>

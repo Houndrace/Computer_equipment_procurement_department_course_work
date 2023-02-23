@@ -3,8 +3,8 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:conv="clr-namespace:PurchasingDepartment.Convertors"
-     
+        xmlns:conv="clr-namespace:PurchasingDepartment.Converters"
+        xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
         xmlns:viewmodel="clr-namespace:PurchasingDepartment.ViewModels"
         xmlns:customcontrols="clr-namespace:PurchasingDepartment.CustomControls"
         mc:Ignorable="d"
@@ -12,9 +12,6 @@
         Height="430" 
         MinWidth="290"
         Width="290"
-        ResizeMode="CanResizeWithGrip"
-        WindowStyle="None"
-        WindowStartupLocation="CenterScreen"
         Style="{DynamicResource CustomWindow}">
     <!--Context-->
     <Window.DataContext>
@@ -33,7 +30,6 @@
     <Grid MaxHeight="430" >
 
         <Grid.RowDefinitions>
-            <RowDefinition Height="35"/>
             <RowDefinition Height="100"/>
             <RowDefinition Height="5*"/>
             <RowDefinition />
@@ -41,13 +37,13 @@
         <!--Header-->
         <!--ДОбавить перетяжку за хедер путем создания общей команды-->
         <TextBlock Text="Авторизация"
-                   Grid.Row="1"
+                   Grid.Row="0"
                    FontSize="20"
                    HorizontalAlignment="Center"
                    VerticalAlignment="Center"
                    Foreground="White"/>
         <!--Main body -->
-        <Grid Grid.Row="2"
+        <Grid Grid.Row="1"
               Width="250">
             <Grid.RowDefinitions>
                 <RowDefinition/>
@@ -57,7 +53,7 @@
 
             <TextBlock Text="Логин"
                        FontSize="14"
-                       Foreground="White"
+                       Foreground="{StaticResource PrimaryText}"
                        VerticalAlignment="Top"
                        Margin="22 0" 
                        Grid.Row="0"/>
@@ -71,19 +67,17 @@
 
             <TextBlock Text="Пароль"
                        FontSize="14"
-                       Foreground="White"
+                       Foreground="{StaticResource PrimaryText}"
                        VerticalAlignment="Top"
                        Margin="22 0" 
                        Grid.Row="1"/>
-
-
 
             <customcontrols:BindablePasswordBox Password="{Binding Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                                 Height="35"                                                       
                                                 VerticalAlignment="Top"                           
                                                 Margin="20 20 20 0"
-                                                Grid.Row="1" />
-             <!--Добавить тригер для кнопку при нажатии Enter-->
+                                                Grid.Row="1"/>
+            <!--Добавить тригер для кнопку при нажатии Enter-->
             <Button Name="AuthorizationButton"
                     Style="{DynamicResource CustomButton}"
                     Command="{Binding AuthorizeCommand}"
@@ -95,7 +89,7 @@
 
             <TextBlock Name="myTextBlock" 
                        Text="{Binding ErrorMessage}"
-                       Style="{DynamicResource CustomTextBlock}"
+                       Style="{DynamicResource ErrorTextBlock}"
                        FontSize="11"
                        Height="38"
                        TextWrapping="Wrap"
