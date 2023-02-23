@@ -12,123 +12,74 @@
         WindowState="Maximized"
         Style="{DynamicResource CustomWindow}">
     <Window.Resources>
-        <Style x:Key="CustomWindow" TargetType="{x:Type Window}">
-            <Setter Property="Background" Value="{DynamicResource WindowBackground}"/>
-            <Setter Property="WindowStyle" Value="None"/>
-            <Setter Property="AllowsTransparency" Value="True" />
-            <Setter Property="BorderBrush" Value="Transparent" />
 
-            <Setter Property="BorderThickness" Value="7" />
-            <Setter Property="MaxHeight" Value="{x:Static SystemParameters.MaximizedPrimaryScreenHeight}"/>
-            <Setter Property="MaxWidth" Value="{x:Static SystemParameters.MaximizedPrimaryScreenWidth}"/>
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type Window}">
-                        <Border Background="{TemplateBinding Background}"
-                                BorderBrush="{TemplateBinding BorderBrush}"
-                                BorderThickness="{TemplateBinding BorderThickness}">
-                            <Grid>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="*"/>
-                                </Grid.RowDefinitions>
-
-                                <customcontrols:CustomTitleBar Background="{TemplateBinding Background}"
-                                                       Grid.Row="0"/>
-
-                                <ContentPresenter Grid.Row="1"/>
-                            </Grid>
-                        </Border>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-
-
-            <!--<Setter Property="WindowChrome.WindowChrome">
-                <Setter.Value>
-                    <WindowChrome CaptionHeight="0"
-                          ResizeBorderThickness="5"
-                          CornerRadius="0"
-                          GlassFrameThickness="0"
-                          NonClientFrameEdges="None"
-                          UseAeroCaptionButtons="False">
-                    </WindowChrome>
-                </Setter.Value>
-            </Setter>-->
-
-        </Style>
-        <!--<ResourceDictionary Source="Styles/CustomWindow.xaml">
+        <ResourceDictionary Source="Styles/CustomWindow.xaml">
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Styles/CustomWindow.xaml"/>
+                <ResourceDictionary Source="ResourseDictionaries/MainWindowResourses.xaml"/>
             </ResourceDictionary.MergedDictionaries>
-        </ResourceDictionary>-->
-
-        <Style x:Key="TabArrowButton"
-               TargetType="{x:Type Button}">
-            <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
-            <Setter Property="Background" Value="{StaticResource ButtonBackground}"/>
-            <Setter Property="BorderBrush" Value="Transparent"/>
-            <Setter Property="Foreground" Value="White"/>
-            <Setter Property="FontSize" Value="14"/>
-            <Setter Property="HorizontalContentAlignment" Value="Center"/>
-            <Setter Property="VerticalContentAlignment" Value="Center"/>
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type Button}">
-                        <Border Background="{TemplateBinding Background}"
-                            BorderBrush="{TemplateBinding BorderBrush}"
-                            CornerRadius="3">
-                            <ContentPresenter Focusable="False"
-                                          HorizontalAlignment="Center"
-                                          VerticalAlignment="Center"/>
-                        </Border>
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="IsMouseOver" Value="True">
-                                <Setter Property="Background" Value="{StaticResource ButtonHover}"/>
-                            </Trigger>
-                            <Trigger Property="IsPressed" Value="True">
-                                <Setter Property="Background" Value="{StaticResource ButtonClick}"/>
-                            </Trigger>
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
+        </ResourceDictionary>
+        
+        
+        
+        
+        
+        
+        
     </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="47"/>
+            <RowDefinition Height="43"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="65"/>
+            <RowDefinition Height="63"/>
         </Grid.RowDefinitions>
-
-        <Grid>
+        <!--Control menu-->
+        <Grid Grid.Row="0">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="100"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
+            <StackPanel Orientation="Horizontal"
+                        Margin="10 7 10 15"
+                        Grid.Column="0">
+                <Button Style="{DynamicResource LeftArrowButton}"
+                        Margin="0 0 4 0"/>
+
+                <Button Style="{DynamicResource RightArrowButton}"
+                        Margin="4 0 0 0"/>
+            </StackPanel>
 
             <StackPanel Orientation="Horizontal"
-                        Grid.Column="0">
-                <Button Style="{DynamicResource TabArrowButton}"
-                        Width="14"
-                        Height="14"/>
-                
-                <Button Style="{DynamicResource TabArrowButton}"
-                        Width="14"
-                        Height="14"/>
-            </StackPanel>
-            
-            <StackPanel Orientation="Horizontal"
+                        Margin="0 4 10 15"
                         Grid.Column="1">
-                
+                <Button Content="STORE"
+                        Margin="10 0"
+                        Style="{DynamicResource PageSelectorButton}"/>
+                <Button Content="LIBRARY" 
+                        Margin="10 0"
+                        Style="{DynamicResource PageSelectorButton}"/>
+                <Button Content="COMMUNITY" 
+                        Margin="10 0"
+                        Style="{DynamicResource PageSelectorButton}"/>
+                <Button Content="HOUNDRACE" 
+                        Margin="10 0"
+                        Style="{DynamicResource PageSelectorButton}"/>
             </StackPanel>
-            
+
+            <TextBlock Width="130"
+                       Height="25"
+                       HorizontalAlignment="Right"
+                       Background="{StaticResource PageBackground}"
+                       Grid.Column="2">
+                <Label Content="Houndrace"
+                       Foreground="{StaticResource BluePrimaryText}"/>
+            </TextBlock>
         </Grid>
         
         
         <Frame x:Name="MainWindowFrame"
-               Background="#1b2838"
+               Background="{StaticResource PageBackground}"
                Grid.Row="1"/>
     </Grid>
 </Window>

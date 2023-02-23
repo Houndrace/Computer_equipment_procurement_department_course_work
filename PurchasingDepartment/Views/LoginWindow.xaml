@@ -53,7 +53,7 @@
 
             <TextBlock Text="Логин"
                        FontSize="14"
-                       Foreground="{StaticResource DefaultText}"
+                       Foreground="{StaticResource PrimaryText}"
                        VerticalAlignment="Top"
                        Margin="22 0" 
                        Grid.Row="0"/>
@@ -67,7 +67,7 @@
 
             <TextBlock Text="Пароль"
                        FontSize="14"
-                       Foreground="{StaticResource DefaultText}"
+                       Foreground="{StaticResource PrimaryText}"
                        VerticalAlignment="Top"
                        Margin="22 0" 
                        Grid.Row="1"/>

@@ -183,6 +183,16 @@
     <Resource Include="Images\MinimizeActive.png" />
     <Resource Include="Images\MinimizeInactive.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\LeftActive.png" />
+    <Resource Include="Images\LeftInactive.png" />
+    <Resource Include="Images\LeftOff.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\RightActive.png" />
+    <Resource Include="Images\RightInactive.png" />
+    <Resource Include="Images\RightOff.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
