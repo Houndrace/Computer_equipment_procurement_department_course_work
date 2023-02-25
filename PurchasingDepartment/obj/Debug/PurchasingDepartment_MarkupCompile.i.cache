@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 D:\GitHub\Computer_equipment_procurement_department_course_work\PurchasingDepartment\App.xaml
-61509109369
+9-2072891388
 
-15624111304
+17-1874173587
 23-1061006615
-CustomControls\BindablePasswordBox.xaml;CustomControls\CustomTitleBar.xaml;Views\ResourseDictionaries\ColorResourses.xaml;Views\Styles\CustomWindow.xaml;Views\ResourseDictionaries\LoginFormResourses.xaml;Views\LoginWindow.xaml;
+CustomControls\BindablePasswordBox.xaml;CustomControls\CustomTitleBar.xaml;Views\MainPage.xaml;Views\MainWindow.xaml;Views\ResourseDictionaries\ColorResourses.xaml;Views\ResourseDictionaries\MainWindowResourses.xaml;Views\Styles\CustomWindow.xaml;Views\ResourseDictionaries\LoginFormResourses.xaml;Views\LoginWindow.xaml;
 
 True
 

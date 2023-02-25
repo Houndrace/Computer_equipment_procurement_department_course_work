@@ -59,37 +59,6 @@ namespace PurchasingDepartment.CustomControls
             }
         }
 
-        private void TitleBar_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
-        {
-            var window = Window.GetWindow(this);
-            window.ReleaseMouseCapture();
-        }
-
-        private void TitleBar_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            if (e.ClickCount == 2)
-            {
-                ExpandButton_Click(sender, e);
-            }
-            else
-            {
-                var window = Window.GetWindow(this);
-                window.DragMove();
-            }
-        }
-
-        private void TitleBar_MouseMove(object sender, MouseEventArgs e)
-        {
-            var window = Window.GetWindow(this);
-            if (e.LeftButton == MouseButtonState.Pressed && window.WindowState == WindowState.Maximized && e.LeftButton != MouseButtonState.Released)
-            {
-                window.WindowState = WindowState.Normal;
-                window.Left = e.GetPosition(window).X - window.Width / 2;
-                window.Top = e.GetPosition(window).Y - 20;
-                window.DragMove();
-            }
-        }
-
         private void CloseButton_Click(object sender, RoutedEventArgs e)
         {
             var window = Window.GetWindow(this);
@@ -112,7 +81,7 @@ namespace PurchasingDepartment.CustomControls
         private void MinimizeButton_Click(object sender, RoutedEventArgs e)
         {
             var window = Window.GetWindow(this);
-            window.WindowState|= WindowState.Minimized;
+            window.WindowState = WindowState.Minimized;
         }
     }
 }

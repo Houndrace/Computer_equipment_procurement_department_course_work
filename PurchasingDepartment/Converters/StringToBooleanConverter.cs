@@ -2,7 +2,7 @@
 using System.Globalization;
 using System.Windows.Data;
 
-namespace PurchasingDepartment.Convertors
+namespace PurchasingDepartment.Converters
 {
     public class StringToBooleanConverter : IValueConverter
     {
