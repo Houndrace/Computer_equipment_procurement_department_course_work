@@ -12,20 +12,12 @@
         WindowState="Maximized"
         Style="{DynamicResource CustomWindow}">
     <Window.Resources>
-
-        <ResourceDictionary Source="Styles/CustomWindow.xaml">
+        <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="Styles/CustomWindow.xaml"/>
-                <ResourceDictionary Source="ResourseDictionaries/MainWindowResourses.xaml"/>
+                <ResourceDictionary Source="Styles/Windows.xaml"/>
+                <ResourceDictionary Source="Styles/Buttons.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
-        
-        
-        
-        
-        
-        
-        
     </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
@@ -55,16 +47,16 @@
                         Grid.Column="1">
                 <Button Content="STORE"
                         Margin="10 0"
-                        Style="{DynamicResource PageSelectorButton}"/>
+                        Style="{DynamicResource PageSelectButton}"/>
                 <Button Content="LIBRARY" 
                         Margin="10 0"
-                        Style="{DynamicResource PageSelectorButton}"/>
+                        Style="{DynamicResource PageSelectButton}"/>
                 <Button Content="COMMUNITY" 
                         Margin="10 0"
-                        Style="{DynamicResource PageSelectorButton}"/>
+                        Style="{DynamicResource PageSelectButton}"/>
                 <Button Content="HOUNDRACE" 
                         Margin="10 0"
-                        Style="{DynamicResource PageSelectorButton}"/>
+                        Style="{DynamicResource PageSelectButton}"/>
             </StackPanel>
 
             <TextBlock Width="130"
