@@ -12,6 +12,7 @@
         Height="430" 
         MinWidth="290"
         Width="290"
+        WindowStartupLocation="CenterScreen"
         Style="{DynamicResource CustomWindow}">
     <!--Context-->
     <Window.DataContext>
@@ -21,8 +22,10 @@
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="ResourseDictionaries/LoginFormResourses.xaml"/>
-                <ResourceDictionary Source="Styles/CustomWindow.xaml"/>
+                <ResourceDictionary Source="Styles/Buttons.xaml"/>
+                <ResourceDictionary Source="Styles/Windows.xaml"/>
+                <ResourceDictionary Source="Styles/TextBlocks.xaml"/>
+                <ResourceDictionary Source="Styles/TextBoxes.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Window.Resources>
@@ -76,8 +79,12 @@
                                                 Height="35"                                                       
                                                 VerticalAlignment="Top"                           
                                                 Margin="20 20 20 0"
-                                                Grid.Row="1"/>
-            <!--Добавить тригер для кнопку при нажатии Enter-->
+                                                Grid.Row="1">
+                <customcontrols:BindablePasswordBox.InputBindings>
+                    <KeyBinding Key="Return" Command="{Binding AuthorizeCommand}"/>
+                </customcontrols:BindablePasswordBox.InputBindings>
+            </customcontrols:BindablePasswordBox>
+
             <Button Name="AuthorizationButton"
                     Style="{DynamicResource CustomButton}"
                     Command="{Binding AuthorizeCommand}"
@@ -90,9 +97,7 @@
             <TextBlock Name="myTextBlock" 
                        Text="{Binding ErrorMessage}"
                        Style="{DynamicResource ErrorTextBlock}"
-                       FontSize="11"
                        Height="38"
-                       TextWrapping="Wrap"
                        VerticalAlignment="Bottom"
                        Margin="20"
                        Grid.Row="2"/>
