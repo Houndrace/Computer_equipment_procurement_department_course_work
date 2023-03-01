@@ -1,12 +1,13 @@
 ﻿using System;
+using System.Web.UI.WebControls;
 using System.Windows.Input;
 
 namespace PurchasingDepartment.CommonComands
 {
     public class RelayCommand : ICommand
     {
-        private readonly Action execute;
-        private readonly Func<bool> canExecute;
+        private readonly Action<object> execute;
+        private readonly Func<object, bool> canExecute;
 
         public event EventHandler CanExecuteChanged
         {
@@ -14,25 +15,25 @@ namespace PurchasingDepartment.CommonComands
             remove { CommandManager.RequerySuggested -= value; }
         }
 
-        public RelayCommand(Action execute)
+        public RelayCommand(Action<object> execute)
             : this(execute, null)
         {
         }
 
-        public RelayCommand(Action execute, Func<bool> canExecute)
+        public RelayCommand(Action<object> execute, Func<object, bool> canExecute)
         {
             this.execute = execute ?? throw new ArgumentNullException(nameof(execute));
             this.canExecute = canExecute;
         }
 
-        public bool CanExecute(object parametr)
+        public bool CanExecute(object parameter)
         {
-            return canExecute == null || canExecute();
+            return canExecute?.Invoke(parameter) ?? true;
         }
 
-        public void Execute(object parametr)
+        public void Execute(object parameter)
         {
-            execute();
+            execute(parameter);
         }
     }
 }

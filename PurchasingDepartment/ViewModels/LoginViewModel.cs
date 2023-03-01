@@ -19,7 +19,7 @@ namespace PurchasingDepartment.ViewModels
         public LoginViewModel()
         {
             employee = new Сотрудник();
-            AuthorizeCommand = new RelayCommand(() =>
+            AuthorizeCommand = new RelayCommand(obj =>
             {
                 var isUserExists = employee.Authenticate();
                 if (isUserExists)

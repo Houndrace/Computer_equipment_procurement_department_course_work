@@ -24,6 +24,8 @@
     <!--Primary text-->
     <SolidColorBrush x:Key="PrimaryText" Color="#AFAFAF"/>
     <SolidColorBrush x:Key="BluePrimaryText" Color="#55a5c4"/>
+    <SolidColorBrush x:Key="TabPrimaryText" Color="#c8d0dc"/>
+    
     <!--Secondary text-->
     <SolidColorBrush x:Key="SecondaryText" Color="#465566"/>
     <!--Textbox-->

@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("models/newfolder1/model1.context.tt")]
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("models/newfolder1/model1.tt")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("models/%d0%b0%d1%8b%d1%84%d0%b2/model1.context.tt")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("models/%d0%b0%d1%8b%d1%84%d0%b2/model1.tt")]
 
 

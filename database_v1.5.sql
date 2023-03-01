@@ -32,9 +32,21 @@ CREATE TABLE ЕдиницаИзмерения(
     Наименование NVARCHAR(50) NOT NULL,
 );
 
+CREATE TABLE Организация(
+    Код INT IDENTITY(1,1) PRIMARY KEY NOT NULL,
+    Наименование NVARCHAR(100) NOT NULL,
+);
+
+CREATE TABLE УровеньДоступа(
+    Код INT IDENTITY(1,1) PRIMARY KEY NOT NULL,
+    Название NVARCHAR(30) NOT NULL,
+);
+
 CREATE TABLE Сотрудник(
     Код INT IDENTITY(1,1) PRIMARY KEY NOT NULL,
 	КодДолжности INT NOT NULL,
+	КодУровняДоступа INT NOT NULL,
+	КодОрганизации INT NOT NULL,
 	КодТелефона INT NOT NULL,
 	КодЭлектроннойПочты INT,
     Логин NVARCHAR(50) NOT NULL,
@@ -44,7 +56,9 @@ CREATE TABLE Сотрудник(
     Отчество NVARCHAR(50),
 
 	FOREIGN KEY (КодДолжности) REFERENCES Должность(Код),
+	FOREIGN KEY (КодУровняДоступа) REFERENCES УровеньДоступа(Код),
 	FOREIGN KEY (КодТелефона) REFERENCES Телефон(Код),
+	FOREIGN KEY (КодОрганизации) REFERENCES Организация(Код),
 	FOREIGN KEY (КодЭлектроннойПочты) REFERENCES ЭлектроннаяПочта(Код)
 );
 
@@ -61,19 +75,6 @@ CREATE TABLE Поставщик (
 	FOREIGN KEY (КодЭлектроннойПочты) REFERENCES ЭлектроннаяПочта(Код)
 );
 
-CREATE TABLE Заказ (
-    Код INT IDENTITY(1,1) PRIMARY KEY NOT NULL,
-	КодСотрудника INT NOT NULL,
-	КодПоставщика INT NOT NULL,
-	КодВидаОплаты INT NOT NULL,
-    Номер NVARCHAR(50) NOT NULL,
-    ОрганизацияЗаказчик NVARCHAR(100) NOT NULL,
-
-	FOREIGN KEY (КодСотрудника) REFERENCES Сотрудник(Код),
-	FOREIGN KEY (КодПоставщика) REFERENCES Поставщик(Код),
-	FOREIGN KEY (КодВидаОплаты) REFERENCES ВидОплаты(Код)
-);
-
 CREATE TABLE Склад (
     Код INT IDENTITY(1,1) PRIMARY KEY NOT NULL,
 	КодТелефона INT NOT NULL,
@@ -84,15 +85,28 @@ CREATE TABLE Склад (
 	FOREIGN KEY (КодАдреса) REFERENCES Адрес(Код)
 );
 
+CREATE TABLE Заказ (
+    Код INT IDENTITY(1,1) PRIMARY KEY NOT NULL,
+	КодСотрудника INT NOT NULL,
+	КодПоставщика INT NOT NULL,
+	КодCклада INT NOT NULL,
+	КодВидаОплаты INT NOT NULL,
+    Номер NVARCHAR(50) NOT NULL,
+	Дата DATE NOT NULL,
+
+	FOREIGN KEY (КодСотрудника) REFERENCES Сотрудник(Код),
+	FOREIGN KEY (КодПоставщика) REFERENCES Поставщик(Код),
+	FOREIGN KEY (КодCклада) REFERENCES Склад(Код),
+	FOREIGN KEY (КодВидаОплаты) REFERENCES ВидОплаты(Код)
+);
+
 CREATE TABLE Товар (
     Код INT IDENTITY(1,1) PRIMARY KEY NOT NULL,
-	КодCклада INT NOT NULL,
 	КодЕденицыИзмерения INT NOT NULL,
 	Название NVARCHAR(50) NOT NULL,
     Количество INT NOT NULL,
     Цена DECIMAL(10, 2) NOT NULL,
 
-	FOREIGN KEY (КодCклада) REFERENCES Склад(Код),
 	FOREIGN KEY (КодЕденицыИзмерения) REFERENCES ЕдиницаИзмерения(Код)
 );
 

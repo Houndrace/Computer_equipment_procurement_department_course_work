@@ -27,7 +27,10 @@
                 <ResourceDictionary Source="Styles/TextBlocks.xaml"/>
                 <ResourceDictionary Source="Styles/TextBoxes.xaml"/>
             </ResourceDictionary.MergedDictionaries>
+
+            
         </ResourceDictionary>
+        
     </Window.Resources>
     <!--Interface-->
     <Grid MaxHeight="430" >
