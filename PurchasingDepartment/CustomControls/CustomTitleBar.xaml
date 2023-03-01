@@ -31,7 +31,6 @@
                 </Setter.Value>
             </Setter>
         </Style>
-
         <Style x:Key="ExpandButtonStyle"
                TargetType="{x:Type Button}">
             <Setter Property="HorizontalAlignment" Value="Right"/>
@@ -49,7 +48,7 @@
                         </Grid>
                         <ControlTemplate.Triggers>
                             <DataTrigger Binding="{Binding IsMouseOver, RelativeSource={RelativeSource Mode=Self}}" Value="True">
-                            <Setter TargetName="ButtonImage" Property="Source" Value="/PurchasingDepartment;component/Images/ExpandActive.png"/>
+                                <Setter TargetName="ButtonImage" Property="Source" Value="/PurchasingDepartment;component/Images/ExpandActive.png"/>
                             </DataTrigger>
 
                             <DataTrigger Binding="{Binding Path=WindowState, RelativeSource={RelativeSource AncestorType={x:Type Window}}}" Value="Maximized">
@@ -68,7 +67,6 @@
                 </Setter.Value>
             </Setter>
         </Style>
-
         <Style x:Key="CloseButtonStyle"
                TargetType="{x:Type Button}">
             <Setter Property="Template">
