@@ -1,5 +1,5 @@
 ﻿using PurchasingDepartment.CommonComands;
-using PurchasingDepartment.Models.DataBase;
+using PurchasingDepartment.Models.ProcurementModel;
 using PurchasingDepartment.Views;
 using System.Web.UI;
 using System.Windows;
@@ -13,26 +13,25 @@ namespace PurchasingDepartment.ViewModels
     {
         // Fields
         private string errorMessage;
-        private readonly User user;
+        private readonly Сотрудник employee;
         public ICommand AuthorizeCommand { get; private set; }
         // Constuctor
         public LoginViewModel()
         {
-            user = new User();
-            AuthorizeCommand = new RelayCommand(() =>
+            employee = new Сотрудник();
+            AuthorizeCommand = new RelayCommand(obj =>
             {
-                var isUserExists = user.Authenticate();
+                var isUserExists = employee.Authenticate();
                 if (isUserExists)
                 {
                     ErrorMessage = "";
-                    // Новое окно
                     MainWindow mainWindow = new MainWindow();
                     Application.Current.Windows[0].Close();
                     mainWindow.Show();
                 }
                 else
                 {
-                    ErrorMessage = "Пользователь или пароль не найдены, проверьте данные и повторите попытку.";
+                    ErrorMessage = "Пользователь или пароль не найден, проверьте данные и повторите попытку.";
                 }
             });
         }
@@ -40,19 +39,20 @@ namespace PurchasingDepartment.ViewModels
         // Properties to be binded
         public string Login
         {
-            get => user.Login;
+            get => employee.Логин;
             set
             {
-                user.Login = value;
+                employee.Логин = value;
                 OnPropertyChanged(nameof(Login));
             }
         }
+
         public string Password
         {
-            get => user.Password;
+            get => employee.Пароль;
             set
             {
-                user.Password = value;
+                employee.Пароль = value;
                 OnPropertyChanged(nameof(Password));
             }
         }

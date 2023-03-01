@@ -9,6 +9,6 @@
       Title="MainPage">
 
     <Grid>
-
+        <TextBlock Foreground="red">fasdfasdf</TextBlock>
     </Grid>
 </Page>
