@@ -11,7 +11,7 @@ namespace PurchasingDepartment.Models.ProcurementModel
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Склад()
         {
-            Товар = new HashSet<Товар>();
+            Заказ = new HashSet<Заказ>();
         }
 
         [Key]
@@ -27,9 +27,9 @@ namespace PurchasingDepartment.Models.ProcurementModel
 
         public virtual Адрес Адрес { get; set; }
 
-        public virtual Телефон Телефон { get; set; }
-
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Товар> Товар { get; set; }
+        public virtual ICollection<Заказ> Заказ { get; set; }
+
+        public virtual Телефон Телефон { get; set; }
     }
 }

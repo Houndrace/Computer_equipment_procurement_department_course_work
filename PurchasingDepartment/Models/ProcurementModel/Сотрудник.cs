@@ -8,9 +8,9 @@ namespace PurchasingDepartment.Models.ProcurementModel
     using System.Data.Entity.Spatial;
     using System.Linq;
     using System.Text.RegularExpressions;
-    using System.Web.UI.WebControls;
 
-    public partial class Сотрудник : IUserControl {
+    public partial class Сотрудник
+    {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Сотрудник()
         {
@@ -21,6 +21,10 @@ namespace PurchasingDepartment.Models.ProcurementModel
         public int Код { get; set; }
 
         public int КодДолжности { get; set; }
+
+        public int КодУровняДоступа { get; set; }
+
+        public int КодОрганизации { get; set; }
 
         public int КодТелефона { get; set; }
 
@@ -50,22 +54,17 @@ namespace PurchasingDepartment.Models.ProcurementModel
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Заказ> Заказ { get; set; }
 
+        public virtual Организация Организация { get; set; }
+
         public virtual Телефон Телефон { get; set; }
+
+        public virtual УровеньДоступа УровеньДоступа { get; set; }
 
         public virtual ЭлектроннаяПочта ЭлектроннаяПочта { get; set; }
 
-        public bool Authenticate() {
-            if (Логин == null || Логин == "" || Пароль == null || Пароль == "") {
-                return false;
-            }
- 
-            using (var db = new ProcurementModel()) {
-                db.Сотрудник.Load();
-                return db.Сотрудник.Local.ToList().Exists(u => u.Пароль == Пароль && u.Логин == Логин);
-            }
-        }
+        
 
-        public void checkLogin() {
+        /*public void checkLogin() {
             if (Логин.Length < 4)
                 throw new ArgumentException("Длина логина меньше 4 символов");
 
@@ -85,6 +84,6 @@ namespace PurchasingDepartment.Models.ProcurementModel
 
             if (!Regex.IsMatch(Пароль, @"(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])"))
                 throw new ArgumentException("Слишком легкий пароль");
-        }
+        }*/
     }
 }

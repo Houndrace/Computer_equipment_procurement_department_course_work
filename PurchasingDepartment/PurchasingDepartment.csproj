@@ -82,26 +82,36 @@
     </ApplicationDefinition>
     <Compile Include="Models\ProcurementModel\ProcurementModel.cs" />
     <Compile Include="Models\ProcurementModel\Адрес.cs" />
-    <Compile Include="Models\ProcurementModel\ВидОплаты.cs" />
     <Compile Include="Models\ProcurementModel\Должность.cs" />
     <Compile Include="Models\ProcurementModel\ЕдиницаИзмерения.cs" />
     <Compile Include="Models\ProcurementModel\Заказ.cs" />
     <Compile Include="Models\ProcurementModel\ЗаказТовар.cs" />
+    <Compile Include="Models\ProcurementModel\Организация.cs" />
     <Compile Include="Models\ProcurementModel\Поставщик.cs" />
     <Compile Include="Models\ProcurementModel\Склад.cs" />
     <Compile Include="Models\ProcurementModel\Сотрудник.cs" />
+    <Compile Include="Models\ProcurementModel\Статус.cs" />
     <Compile Include="Models\ProcurementModel\Телефон.cs" />
     <Compile Include="Models\ProcurementModel\Товар.cs" />
+    <Compile Include="Models\ProcurementModel\УровеньДоступа.cs" />
     <Compile Include="Models\ProcurementModel\ЭлектроннаяПочта.cs" />
-    <Compile Include="ViewModels\MainViewModel.cs" />
-    <Compile Include="Views\MainPage.xaml.cs">
-      <DependentUpon>MainPage.xaml</DependentUpon>
+    <Compile Include="Utilities\DataValidator.cs" />
+    <Compile Include="ViewModels\MainWindowViewModel.cs" />
+    <Compile Include="ViewModels\OrderCreatingPageViewModel.cs" />
+    <Compile Include="Views\Documents.xaml.cs">
+      <DependentUpon>Documents.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Page1.xaml.cs">
-      <DependentUpon>Page1.xaml</DependentUpon>
+    <Compile Include="Views\OrderCreatingPage.xaml.cs">
+      <DependentUpon>OrderCreatingPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Orders.xaml.cs">
+      <DependentUpon>Orders.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Suppliers.xaml.cs">
+      <DependentUpon>Suppliers.xaml</DependentUpon>
     </Compile>
     <Page Include="CustomControls\BindablePasswordBox.xaml">
       <SubType>Designer</SubType>
@@ -111,7 +121,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\MainPage.xaml">
+    <Page Include="Themes\Core.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Documents.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -119,27 +133,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Page1.xaml">
+    <Page Include="Views\OrderCreatingPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\ResourseDictionaries\ColorResourses.xaml">
+    <Page Include="Views\Orders.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Styles\Buttons.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\Styles\TextBlocks.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\Styles\TextBoxes.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\Styles\Windows.xaml">
+    <Page Include="Themes\ColorResourses.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -156,7 +158,7 @@
     </Compile>
     <Compile Include="Models\IUserControl.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
-    <Compile Include="ViewModels\LoginViewModel.cs" />
+    <Compile Include="ViewModels\LoginWindowViewModel.cs" />
     <Compile Include="CommonComands\RelayCommand.cs" />
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
@@ -166,6 +168,10 @@
       <DependentUpon>LoginWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Views\Suppliers.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">

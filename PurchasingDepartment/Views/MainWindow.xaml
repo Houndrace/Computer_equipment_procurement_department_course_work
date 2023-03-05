@@ -5,117 +5,15 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
         xmlns:converter="clr-namespace:PurchasingDepartment.Converters" 
         xmlns:customcontrols="clr-namespace:PurchasingDepartment.CustomControls" 
-        xmlns:viewmodel="clr-namespace:PurchasingDepartment.ViewModels"
+        xmlns:viewmodel="clr-namespace:PurchasingDepartment.ViewModels" 
+        d:DataContext="{d:DesignInstance Type=viewmodel:MainWindowViewModel}"
         mc:Ignorable="d"
         MinHeight="600"
         Height="600"
         MinWidth="1000"
         Width="1000"
         WindowState="Maximized"
-        Style="{DynamicResource CustomWindow}">
-    <Window.DataContext>
-        <viewmodel:MainViewModel/>
-    </Window.DataContext>
-    <Window.Resources>
-        <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="Styles/Windows.xaml"/>
-                <ResourceDictionary Source="Styles/Buttons.xaml"/>
-            </ResourceDictionary.MergedDictionaries>
-            <Style x:Key="NavigationLeftButton"
-                   TargetType="{x:Type Button}">
-                <Setter Property="Template">
-                    <Setter.Value>
-                        <ControlTemplate TargetType="{x:Type Button}">
-                            <Grid Background="Transparent"
-                                  Width="25"
-                                  Height="25">
-                                <Image x:Name="ButtonImage" 
-                                       Source="/PurchasingDepartment;component/Images/LeftDisabled.png"
-                                       MaxWidth="14"
-                                       MaxHeight="14"/>
-                            </Grid>
-                            <ControlTemplate.Triggers>
-                                <DataTrigger Binding="{Binding ElementName=MainWindowFrame, Path=CanGoBack}" Value="True">
-                                    <Setter TargetName="ButtonImage" Property="Source" Value="/PurchasingDepartment;component/Images/LeftEnabled.png"/>
-                                </DataTrigger>
-
-                                <Trigger Property="IsMouseOver" Value="True">
-                                    <Setter Property="Effect">
-                                        <Setter.Value>
-                                            <DropShadowEffect BlurRadius="5" Color="White" ShadowDepth="0"/>
-                                        </Setter.Value>
-                                    </Setter>
-                                </Trigger>
-                            </ControlTemplate.Triggers>
-                        </ControlTemplate>
-                    </Setter.Value>
-                </Setter>
-            </Style>
-            <Style x:Key="NavigationRightButton"
-                   TargetType="{x:Type Button}">
-                <Setter Property="Template">
-                    <Setter.Value>
-                        <ControlTemplate TargetType="{x:Type Button}">
-                            <Grid Background="Transparent"
-                                  Width="25"
-                                  Height="25">
-                                <Image x:Name="ButtonImage" 
-                                       Source="/PurchasingDepartment;component/Images/RightDisabled.png"
-                                       MaxWidth="14"
-                                       MaxHeight="14"/>
-                            </Grid>
-                            <ControlTemplate.Triggers>
-                                <DataTrigger Binding="{Binding ElementName=MainWindowFrame, Path=CanGoForward}" Value="True">
-                                    <Setter TargetName="ButtonImage" Property="Source" Value="/PurchasingDepartment;component/Images/RightEnabled.png"/>
-                                </DataTrigger>
-
-                                <Trigger Property="IsMouseOver" Value="True">
-                                    <Setter Property="Effect">
-                                        <Setter.Value>
-                                            <DropShadowEffect BlurRadius="5" Color="White" ShadowDepth="0"/>
-                                        </Setter.Value>
-                                    </Setter>
-                                </Trigger>
-                            </ControlTemplate.Triggers>
-                        </ControlTemplate>
-                    </Setter.Value>
-                </Setter>
-            </Style>
-            <Style x:Key="PageSelectButton"
-           TargetType="{x:Type Button}">
-                <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
-                <Setter Property="Background" Value="Transparent"/>
-                <Setter Property="BorderBrush" Value="Transparent"/>
-                <Setter Property="Foreground" Value="{StaticResource TabPrimaryText}"/>
-                <Setter Property="FontSize" Value="20"/>
-                <Setter Property="FontWeight" Value="Regular"/>
-                <Setter Property="HorizontalContentAlignment" Value="Center"/>
-                <Setter Property="VerticalContentAlignment" Value="Center"/>
-                <Setter Property="Template">
-                    <Setter.Value>
-                        <ControlTemplate TargetType="{x:Type Button}">
-                            <Border Background="{TemplateBinding Background}"
-                                    BorderBrush="{TemplateBinding BorderBrush}">
-                                <ContentPresenter Focusable="False"
-                                                  HorizontalAlignment="Center"
-                                                  VerticalAlignment="Center"/>
-                            </Border>
-                            <ControlTemplate.Triggers>
-                                <Trigger Property="IsMouseOver" Value="True">
-                                    <Setter Property="Effect">
-                                        <Setter.Value>
-                                            <DropShadowEffect BlurRadius="9" Color="White" ShadowDepth="0"/>
-                                        </Setter.Value>
-                                    </Setter>
-                                </Trigger>
-                            </ControlTemplate.Triggers>
-                        </ControlTemplate>
-                    </Setter.Value>
-                </Setter>
-            </Style>
-        </ResourceDictionary>
-    </Window.Resources>
+        Style="{StaticResource MainWindow}">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="43"/>
@@ -146,33 +44,41 @@
             <StackPanel Orientation="Horizontal"
                         Margin="0 4 10 15"
                         Grid.Column="1">
-                <Button Content="ОФОРМИТЬ ЗАКАЗ"
-                        Margin="10 0"
-                        Style="{DynamicResource PageSelectButton}" Click="Button_Click"/>
                 <Button Content="ЗАКАЗЫ" 
                         Margin="10 0"
-                        Style="{DynamicResource PageSelectButton}" Click="Button_Click_1"/>
-                <Button Content="НАКЛАДНЫЕ" 
-                        Margin="10 0"
-                        Style="{DynamicResource PageSelectButton}"/>
+                        Style="{DynamicResource PageSelectButton}" 
+                        Command="{Binding NavigateToPage}"
+                        CommandParameter="OrderCreatingPage.xaml"/>
                 <Button Content="ПОСТАВЩИКИ" 
+                        Margin="10 0"    
+                        Style="{DynamicResource PageSelectButton}"
+                        Command="{Binding NavigateToPage}"
+                        CommandParameter="Orders.xaml"/>
+                <Button Content="СКЛАДЫ" 
                         Margin="10 0"
-                        Style="{DynamicResource PageSelectButton}"/>
+                        Style="{DynamicResource PageSelectButton}" />
+
+              
+
             </StackPanel>
 
-            <TextBlock Width="130"
-                       Height="25"
-                       HorizontalAlignment="Right"
-                       Background="{StaticResource PageBackground}"
-                       Grid.Column="2">
-                <Label Content="Houndrace"
-                       Foreground="{StaticResource BluePrimaryText}"/>
-            </TextBlock>
+            <StackPanel Grid.Column="2"
+                        Margin="0 0 10 0"
+                        Width="Auto"
+                        Height="25"
+                        HorizontalAlignment="Right"
+                        Background="{StaticResource PageBackground}">
+                <Label Content="{Binding FullName}"
+                       Foreground="{StaticResource BluePrimaryText}"
+                       Margin="5 0"/>
+            </StackPanel>
+            
         </Grid>
 
 
         <Frame x:Name="MainWindowFrame"
                NavigationUIVisibility="Hidden"
+               Content="{Binding CurrentPage}"
                Background="{StaticResource PageBackground}"
                Grid.Row="1"/>
     </Grid>
