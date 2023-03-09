@@ -4,44 +4,44 @@ USE ОтделЗакупокКомпьютернойТехникиКолледжа;
 GO
 CREATE TABLE Должность(
     Код INT IDENTITY(1,1) PRIMARY KEY NOT NULL,
-    Наименование NVARCHAR(50) NOT NULL,
+    Название NVARCHAR(50) NOT NULL,
 );
-
+GO
 CREATE TABLE ЭлектроннаяПочта(
     Код INT IDENTITY(1,1) PRIMARY KEY NOT NULL,
     АдресПочты NVARCHAR(50) NOT NULL,
 );
-
+GO
 CREATE TABLE Телефон(
     Код INT IDENTITY(1,1) PRIMARY KEY NOT NULL,
     Номер NVARCHAR(20) NOT NULL,
 );
-
+GO
 CREATE TABLE Адрес(
     Код INT IDENTITY(1,1) PRIMARY KEY NOT NULL,
-    НазваниеАдреса NVARCHAR(100) NOT NULL,
+    Название NVARCHAR(100) NOT NULL,
 );
-
+GO
 CREATE TABLE ЕдиницаИзмерения(
     Код INT IDENTITY(1,1) PRIMARY KEY NOT NULL,
-    Наименование NVARCHAR(50) NOT NULL,
+    Название NVARCHAR(50) NOT NULL,
 );
-
+GO
 CREATE TABLE Организация(
     Код INT IDENTITY(1,1) PRIMARY KEY NOT NULL,
-    Наименование NVARCHAR(100) NOT NULL,
+    Название NVARCHAR(100) NOT NULL,
 );
-
+GO
 CREATE TABLE УровеньДоступа(
     Код INT IDENTITY(1,1) PRIMARY KEY NOT NULL,
     Название NVARCHAR(30) NOT NULL,
 );
-
+GO
 CREATE TABLE Статус(
     Код INT IDENTITY(1,1) PRIMARY KEY NOT NULL,
     Название NVARCHAR(30) NOT NULL,
 );
-
+GO
 CREATE TABLE Сотрудник(
     Код INT IDENTITY(1,1) PRIMARY KEY NOT NULL,
 	КодДолжности INT NOT NULL,
@@ -55,13 +55,20 @@ CREATE TABLE Сотрудник(
     Имя NVARCHAR(50) NOT NULL,
     Отчество NVARCHAR(50),
 
-	FOREIGN KEY (КодДолжности) REFERENCES Должность(Код),
-	FOREIGN KEY (КодУровняДоступа) REFERENCES УровеньДоступа(Код),
-	FOREIGN KEY (КодТелефона) REFERENCES Телефон(Код),
-	FOREIGN KEY (КодОрганизации) REFERENCES Организация(Код),
-	FOREIGN KEY (КодЭлектроннойПочты) REFERENCES ЭлектроннаяПочта(Код)
+	CONSTRAINT FK_Сотрудник_Должность FOREIGN KEY (КодДолжности) 
+	REFERENCES Должность(Код),
+	CONSTRAINT FK_Сотрудник_УровеньДоступа FOREIGN KEY (КодУровняДоступа) 
+	REFERENCES УровеньДоступа(Код),
+	CONSTRAINT FK_Сотрудник_Телефон FOREIGN KEY (КодТелефона) 
+	REFERENCES Телефон(Код),
+	CONSTRAINT FK_Сотрудник_Организация FOREIGN KEY (КодОрганизации) 
+	REFERENCES Организация(Код),
+	CONSTRAINT FK_Сотрудник_ЭлектроннаяПочта FOREIGN KEY (КодЭлектроннойПочты) 
+	REFERENCES ЭлектроннаяПочта(Код)
+	ON DELETE CASCADE
+	ON UPDATE CASCADE
 );
-
+GO
 CREATE TABLE Поставщик (
     Код INT IDENTITY(1,1) PRIMARY KEY NOT NULL,
     КодТелефона INT NOT NULL,
@@ -69,134 +76,131 @@ CREATE TABLE Поставщик (
 	КодЭлектроннойПочты INT,
 	НаименованиеФирмы NVARCHAR(100) NOT NULL,
     
-
-	FOREIGN KEY (КодТелефона) REFERENCES Телефон(Код),
-	FOREIGN KEY (КодАдреса) REFERENCES Адрес(Код),
-	FOREIGN KEY (КодЭлектроннойПочты) REFERENCES ЭлектроннаяПочта(Код)
+	CONSTRAINT FK_Поставщик_Телефон FOREIGN KEY (КодТелефона) 
+	REFERENCES Телефон(Код),
+	CONSTRAINT FK_Поставщик_Адрес FOREIGN KEY (КодАдреса) 
+	REFERENCES Адрес(Код),
+	CONSTRAINT FK_Поставщик_ЭлектроннаяПочта FOREIGN KEY (КодЭлектроннойПочты) 
+	REFERENCES ЭлектроннаяПочта(Код)
+	ON DELETE CASCADE
+	ON UPDATE CASCADE
 );
-
+GO
 CREATE TABLE Склад (
     Код INT IDENTITY(1,1) PRIMARY KEY NOT NULL,
 	КодТелефона INT NOT NULL,
 	КодАдреса INT NOT NULL,
 	Наименование NVARCHAR(100) NOT NULL,
 
-	FOREIGN KEY (КодТелефона) REFERENCES Телефон(Код),
-	FOREIGN KEY (КодАдреса) REFERENCES Адрес(Код)
+	CONSTRAINT FK_Склад_Телефон FOREIGN KEY (КодТелефона) 
+	REFERENCES Телефон(Код),
+	CONSTRAINT FK_Склад_Адрес FOREIGN KEY (КодАдреса) 
+	REFERENCES Адрес(Код)
+	ON DELETE CASCADE
+	ON UPDATE CASCADE
 );
-
+GO
 CREATE TABLE Заказ (
     Код INT IDENTITY(1,1) PRIMARY KEY NOT NULL,
 	КодСтатуса INT NOT NULL,
+	КодCклада INT NOT NULL,
 	КодСотрудника INT NOT NULL,
 	КодПоставщика INT NOT NULL,
-	КодCклада INT NOT NULL,
 	Оплачено BIT NOT NULL,
     Номер NVARCHAR(50) NOT NULL,
 	Дата DATE NOT NULL,
 
-	FOREIGN KEY (КодСотрудника) REFERENCES Сотрудник(Код),
-	FOREIGN KEY (КодСтатуса) REFERENCES Статус(Код),
-	FOREIGN KEY (КодПоставщика) REFERENCES Поставщик(Код),
-	FOREIGN KEY (КодCклада) REFERENCES Склад(Код)
+	CONSTRAINT FK_Заказ_Сотрудник FOREIGN KEY (КодСотрудника) 
+	REFERENCES Сотрудник(Код),
+	CONSTRAINT FK_Заказ_Склад FOREIGN KEY (КодCклада) 
+	REFERENCES Склад(Код),
+	CONSTRAINT FK_Заказ_Статус FOREIGN KEY (КодСтатуса) 
+	REFERENCES Статус(Код),
+	CONSTRAINT FK_Заказ_Поставщик FOREIGN KEY (КодПоставщика) 
+	REFERENCES Поставщик(Код)
+	ON DELETE CASCADE
+	ON UPDATE CASCADE
 );
-
+GO
 CREATE TABLE Товар (
     Код INT IDENTITY(1,1) PRIMARY KEY NOT NULL,
 	КодЕденицыИзмерения INT NOT NULL,
+	КодЗаказа INT NOT NULL,
 	Название NVARCHAR(50) NOT NULL,
     Количество INT NOT NULL,
     Цена DECIMAL(10, 2) NOT NULL,
 
-	FOREIGN KEY (КодЕденицыИзмерения) REFERENCES ЕдиницаИзмерения(Код)
+	CONSTRAINT FK_Товар_ЕдиницаИзмерения FOREIGN KEY (КодЕденицыИзмерения) REFERENCES ЕдиницаИзмерения(Код),
+	CONSTRAINT FK_Товар_Заказ FOREIGN KEY (КодЗаказа) REFERENCES Заказ(Код),
+	ON DELETE CASCADE
+	ON UPDATE CASCADE
 );
-
-CREATE TABLE ЗаказТовар (
-    Код INT IDENTITY(1,1) PRIMARY KEY NOT NULL,
-    КодЗаказа INT NOT NULL,
-	КодТовара INT NOT NULL,
-
-	FOREIGN KEY (КодЗаказа) REFERENCES Заказ(Код),
-	FOREIGN KEY (КодТовара) REFERENCES Товар(Код)
-);
-
-INSERT [dbo].[Адрес] ([Код], [НазваниеАдреса]) VALUES (1, N'ул. Спартака, 39, Тверь, Тверская обл., 170001')
-INSERT [dbo].[Адрес] ([Код], [НазваниеАдреса]) VALUES (2, N'ул. Спартака, 42-б, 3 этаж, Тверь, Тверская обл., 170001')
-SET IDENTITY_INSERT [dbo].[Адрес] OFF
 GO
-SET IDENTITY_INSERT [dbo].[Должность] ON 
-
-INSERT [dbo].[Должность] ([Код], [Наименование]) VALUES (1, N'Менеджер')
-INSERT [dbo].[Должность] ([Код], [Наименование]) VALUES (2, N'Заведующий отделом')
-SET IDENTITY_INSERT [dbo].[Должность] OFF
+INSERT [dbo].[Адрес] ([Название]) VALUES (N'ул. Спартака, 39, Тверь, Тверская обл., 170001')
+INSERT [dbo].[Адрес] ([Название]) VALUES (N'ул. Спартака, 42-б, 3 этаж, Тверь, Тверская обл., 170001')
 GO
-SET IDENTITY_INSERT [dbo].[ЕдиницаИзмерения] ON 
-
-INSERT [dbo].[ЕдиницаИзмерения] ([Код], [Наименование]) VALUES (1, N'шт.')
-SET IDENTITY_INSERT [dbo].[ЕдиницаИзмерения] OFF
+INSERT [dbo].[Должность] ([Название]) VALUES (N'Менеджер')
+INSERT [dbo].[Должность] ([Название]) VALUES (N'Заведующий отделом')
 GO
-SET IDENTITY_INSERT [dbo].[Заказ] ON 
-
-INSERT [dbo].[Заказ] ([Код], [КодСтатуса], [КодСотрудника], [КодПоставщика], [КодCклада], [Оплачено], [Номер], [Дата]) VALUES (1, 1, 1, 1, 1, 0, N'000001', CAST(N'2023-03-04' AS Date))
-SET IDENTITY_INSERT [dbo].[Заказ] OFF
+INSERT [dbo].[ЕдиницаИзмерения] ([Название]) VALUES (N'шт.')
+INSERT [dbo].[ЕдиницаИзмерения] ([Название]) VALUES (N'уп.')
 GO
-SET IDENTITY_INSERT [dbo].[ЗаказТовар] ON 
-
-INSERT [dbo].[ЗаказТовар] ([Код], [КодЗаказа], [КодТовара]) VALUES (1, 1, 1)
-INSERT [dbo].[ЗаказТовар] ([Код], [КодЗаказа], [КодТовара]) VALUES (2, 1, 2)
-SET IDENTITY_INSERT [dbo].[ЗаказТовар] OFF
 GO
-SET IDENTITY_INSERT [dbo].[Организация] ON 
 
-INSERT [dbo].[Организация] ([Код], [Наименование]) VALUES (1, N'Колледж')
-SET IDENTITY_INSERT [dbo].[Организация] OFF
+
+INSERT [dbo].[Статус] ( [Название]) VALUES ( N'На согласовании')
+INSERT [dbo].[Статус] ( [Название]) VALUES ( N'Согласован')
+INSERT [dbo].[Статус] ([Название]) VALUES ( N'Подтвержден')
+INSERT [dbo].[Статус] ([Название]) VALUES ( N'Закрыт')
 GO
-SET IDENTITY_INSERT [dbo].[Поставщик] ON 
 
-INSERT [dbo].[Поставщик] ([Код], [КодТелефона], [КодАдреса], [КодЭлектроннойПочты], [НаименованиеФирмы]) VALUES (1, 1, 2, 2, N'ТЕХТВЕРЬ')
-SET IDENTITY_INSERT [dbo].[Поставщик] OFF
+
+INSERT [dbo].[УровеньДоступа] ( [Название]) VALUES (N'Администратор')
+INSERT [dbo].[УровеньДоступа] ( [Название]) VALUES (N'Пользователь')
+
 GO
-SET IDENTITY_INSERT [dbo].[Склад] ON 
 
-INSERT [dbo].[Склад] ([Код], [КодТелефона], [КодАдреса], [Наименование]) VALUES (1, 3, 1, N'Компьютерный склад')
-SET IDENTITY_INSERT [dbo].[Склад] OFF
+
+INSERT [dbo].[ЭлектроннаяПочта] ( [АдресПочты]) VALUES (N'college@gmail.com')
+INSERT [dbo].[ЭлектроннаяПочта] ( [АдресПочты]) VALUES (N'supplier@gmail.com')
+INSERT [dbo].[ЭлектроннаяПочта] ( [АдресПочты]) VALUES ( N'employee@gmail.com')
+
 GO
-SET IDENTITY_INSERT [dbo].[Сотрудник] ON 
 
-INSERT [dbo].[Сотрудник] ([Код], [КодДолжности], [КодУровняДоступа], [КодОрганизации], [КодТелефона], [КодЭлектроннойПочты], [Логин], [Пароль], [Фамилия], [Имя], [Отчество]) VALUES (1, 1, 2, 1, 4, 3, N'manager', N'truemanager', N'Иванов', N'Сергей', N'Федорович')
-SET IDENTITY_INSERT [dbo].[Сотрудник] OFF
+
+INSERT [dbo].[Телефон] ([Номер]) VALUES ( N'84822750985')
+INSERT [dbo].[Телефон] ( [Номер]) VALUES ( N'84822422601')
+INSERT [dbo].[Телефон] ( [Номер]) VALUES ( N'84824352623')
+INSERT [dbo].[Телефон] ( [Номер]) VALUES ( N'89201451352')
+INSERT [dbo].[Телефон] ([Номер]) VALUES ( N'89202351366')
+
 GO
-SET IDENTITY_INSERT [dbo].[Статус] ON 
 
-INSERT [dbo].[Статус] ([Код], [Название]) VALUES (1, N'На согласовании')
-INSERT [dbo].[Статус] ([Код], [Название]) VALUES (2, N'Согласован')
-INSERT [dbo].[Статус] ([Код], [Название]) VALUES (3, N'Подтвержден')
-INSERT [dbo].[Статус] ([Код], [Название]) VALUES (4, N'Закрыт')
-SET IDENTITY_INSERT [dbo].[Статус] OFF
+
+INSERT [dbo].[Организация] ([Название]) VALUES ( N'ТПЭК')
+
 GO
-SET IDENTITY_INSERT [dbo].[Телефон] ON 
 
-INSERT [dbo].[Телефон] ([Код], [Номер]) VALUES (1, N'84822750985')
-INSERT [dbo].[Телефон] ([Код], [Номер]) VALUES (2, N'84822422601')
-INSERT [dbo].[Телефон] ([Код], [Номер]) VALUES (3, N'84824352623')
-INSERT [dbo].[Телефон] ([Код], [Номер]) VALUES (4, N'89201451352')
-SET IDENTITY_INSERT [dbo].[Телефон] OFF
+
+INSERT [dbo].[Поставщик] ( [КодТелефона], [КодАдреса], [КодЭлектроннойПочты], [НаименованиеФирмы]) VALUES ( 1, 2, 2, N'ТЕХТВЕРЬ')
+
 GO
-SET IDENTITY_INSERT [dbo].[Товар] ON 
 
-INSERT [dbo].[Товар] ([Код], [КодЕденицыИзмерения], [Название], [Количество], [Цена]) VALUES (1, 1, N'Компьютерная мышь', 2, CAST(500.00 AS Decimal(10, 2)))
-INSERT [dbo].[Товар] ([Код], [КодЕденицыИзмерения], [Название], [Количество], [Цена]) VALUES (2, 1, N'Клавиатура', 2, CAST(600.00 AS Decimal(10, 2)))
-SET IDENTITY_INSERT [dbo].[Товар] OFF
+INSERT [dbo].[Склад] ( [КодТелефона], [КодАдреса], [Наименование]) VALUES ( 3, 1, N'Склад техники')
+
 GO
-SET IDENTITY_INSERT [dbo].[УровеньДоступа] ON 
 
-INSERT [dbo].[УровеньДоступа] ([Код], [Название]) VALUES (1, N'Администратор')
-INSERT [dbo].[УровеньДоступа] ([Код], [Название]) VALUES (2, N'Пользователь')
-SET IDENTITY_INSERT [dbo].[УровеньДоступа] OFF
+
+INSERT [dbo].[Сотрудник] ([КодДолжности], [КодУровняДоступа], [КодОрганизации], [КодТелефона], [КодЭлектроннойПочты], [Логин], [Пароль], [Фамилия], [Имя], [Отчество]) VALUES ( 1, 2, 1, 4, 3, N'manager', N'truemanager', N'Иванов', N'Сергей', N'Федорович')
+INSERT [dbo].[Сотрудник] ([КодДолжности], [КодУровняДоступа], [КодОрганизации], [КодТелефона], [КодЭлектроннойПочты], [Логин], [Пароль], [Фамилия], [Имя], [Отчество]) VALUES ( 2, 1, 1, 5, NULL, N'admin', N'trueadmin', N'Федоров', N'Сергей', N'Иванович')
+
+
+
 GO
-SET IDENTITY_INSERT [dbo].[ЭлектроннаяПочта] ON 
+INSERT [dbo].[Заказ] ([КодСтатуса], [КодCклада], [КодСотрудника], [КодПоставщика], [Оплачено], [Номер], [Дата]) VALUES ( 1, 1, 1, 1, 0, N'000001', CAST(N'2023-03-04' AS Date))
+GO
 
-INSERT [dbo].[ЭлектроннаяПочта] ([Код], [АдресПочты]) VALUES (1, N'college@gmail.com')
-INSERT [dbo].[ЭлектроннаяПочта] ([Код], [АдресПочты]) VALUES (2, N'supplier@gmail.com')
-INSERT [dbo].[ЭлектроннаяПочта] ([Код], [АдресПочты]) VALUES (3, N'employee@gmail.com')
-SET IDENTITY_INSERT [dbo].[ЭлектроннаяПочта] OFF
+
+INSERT [dbo].[Товар] ( [КодЕденицыИзмерения],  [КодЗаказа], [Название], [Количество], [Цена]) VALUES (1, 1, N'Компьютерная мышь', 2, CAST(500.00 AS Decimal(10, 2)))
+INSERT [dbo].[Товар] ( [КодЕденицыИзмерения],  [КодЗаказа], [Название], [Количество], [Цена]) VALUES (1, 1, N'Компьютерная клавиатура', 3, CAST(500.00 AS Decimal(10, 2)))
+
