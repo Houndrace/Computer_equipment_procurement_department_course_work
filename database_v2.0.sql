@@ -131,7 +131,7 @@ CREATE TABLE Товар (
     Цена DECIMAL(10, 2) NOT NULL,
 
 	CONSTRAINT FK_Товар_ЕдиницаИзмерения FOREIGN KEY (КодЕденицыИзмерения) REFERENCES ЕдиницаИзмерения(Код),
-	CONSTRAINT FK_Товар_Заказ FOREIGN KEY (КодЗаказа) REFERENCES Заказ(Код),
+	CONSTRAINT FK_Товар_Заказ FOREIGN KEY (КодЗаказа) REFERENCES Заказ(Код)
 	ON DELETE CASCADE
 	ON UPDATE CASCADE
 );
