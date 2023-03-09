@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 D:\GitHub\Computer_equipment_procurement_department_course_work\PurchasingDepartment\App.xaml
-11504137678
+102147220002
 
-292086516916
-25951867653
-CustomControls\BindablePasswordBox.xaml;CustomControls\CustomTitleBar.xaml;Views\MainPage.xaml;Views\MainWindow.xaml;Views\Page1.xaml;Views\ResourseDictionaries\ColorResourses.xaml;Views\Styles\Buttons.xaml;Views\Styles\TextBlocks.xaml;Views\Styles\TextBoxes.xaml;Views\Styles\Windows.xaml;Views\LoginWindow.xaml;
+36-189415989
+140-1014774173
+CustomControls\BindablePasswordBox.xaml;CustomControls\CustomTitleBar.xaml;Themes\Core.xaml;Views\Documents.xaml;Views\MainView.xaml;Views\OrderCreatingView.xaml;Views\Orders.xaml;Themes\ColorResourses.xaml;Views\LoginView.xaml;Views\Suppliers.xaml;
 
-False
+True
 

@@ -10,16 +10,18 @@ namespace PurchasingDepartment.Models.ProcurementModel {
         }
 
         public virtual DbSet<Адрес> Адрес { get; set; }
-        public virtual DbSet<ВидОплаты> ВидОплаты { get; set; }
         public virtual DbSet<Должность> Должность { get; set; }
         public virtual DbSet<ЕдиницаИзмерения> ЕдиницаИзмерения { get; set; }
         public virtual DbSet<Заказ> Заказ { get; set; }
         public virtual DbSet<ЗаказТовар> ЗаказТовар { get; set; }
+        public virtual DbSet<Организация> Организация { get; set; }
         public virtual DbSet<Поставщик> Поставщик { get; set; }
         public virtual DbSet<Склад> Склад { get; set; }
         public virtual DbSet<Сотрудник> Сотрудник { get; set; }
+        public virtual DbSet<Статус> Статус { get; set; }
         public virtual DbSet<Телефон> Телефон { get; set; }
         public virtual DbSet<Товар> Товар { get; set; }
+        public virtual DbSet<УровеньДоступа> УровеньДоступа { get; set; }
         public virtual DbSet<ЭлектроннаяПочта> ЭлектроннаяПочта { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder) {
@@ -33,12 +35,6 @@ namespace PurchasingDepartment.Models.ProcurementModel {
                 .HasMany(e => e.Склад)
                 .WithRequired(e => e.Адрес)
                 .HasForeignKey(e => e.КодАдреса)
-                .WillCascadeOnDelete(false);
-
-            modelBuilder.Entity<ВидОплаты>()
-                .HasMany(e => e.Заказ)
-                .WithRequired(e => e.ВидОплаты)
-                .HasForeignKey(e => e.КодВидаОплаты)
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<Должность>()
@@ -59,6 +55,12 @@ namespace PurchasingDepartment.Models.ProcurementModel {
                 .HasForeignKey(e => e.КодЗаказа)
                 .WillCascadeOnDelete(false);
 
+            modelBuilder.Entity<Организация>()
+                .HasMany(e => e.Сотрудник)
+                .WithRequired(e => e.Организация)
+                .HasForeignKey(e => e.КодОрганизации)
+                .WillCascadeOnDelete(false);
+
             modelBuilder.Entity<Поставщик>()
                 .HasMany(e => e.Заказ)
                 .WithRequired(e => e.Поставщик)
@@ -66,7 +68,7 @@ namespace PurchasingDepartment.Models.ProcurementModel {
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<Склад>()
-                .HasMany(e => e.Товар)
+                .HasMany(e => e.Заказ)
                 .WithRequired(e => e.Склад)
                 .HasForeignKey(e => e.КодCклада)
                 .WillCascadeOnDelete(false);
@@ -75,6 +77,12 @@ namespace PurchasingDepartment.Models.ProcurementModel {
                 .HasMany(e => e.Заказ)
                 .WithRequired(e => e.Сотрудник)
                 .HasForeignKey(e => e.КодСотрудника)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<Статус>()
+                .HasMany(e => e.Заказ)
+                .WithRequired(e => e.Статус)
+                .HasForeignKey(e => e.КодСтатуса)
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<Телефон>()
@@ -103,6 +111,12 @@ namespace PurchasingDepartment.Models.ProcurementModel {
                 .HasMany(e => e.ЗаказТовар)
                 .WithRequired(e => e.Товар)
                 .HasForeignKey(e => e.КодТовара)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<УровеньДоступа>()
+                .HasMany(e => e.Сотрудник)
+                .WithRequired(e => e.УровеньДоступа)
+                .HasForeignKey(e => e.КодУровняДоступа)
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<ЭлектроннаяПочта>()

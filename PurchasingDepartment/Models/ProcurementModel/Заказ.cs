@@ -17,25 +17,30 @@ namespace PurchasingDepartment.Models.ProcurementModel
         [Key]
         public int Код { get; set; }
 
+        public int КодСтатуса { get; set; }
+
         public int КодСотрудника { get; set; }
 
         public int КодПоставщика { get; set; }
 
-        public int КодВидаОплаты { get; set; }
+        public int КодCклада { get; set; }
+
+        public bool Оплачено { get; set; }
 
         [Required]
         [StringLength(50)]
         public string Номер { get; set; }
 
-        [Required]
-        [StringLength(100)]
-        public string ОрганизацияЗаказчик { get; set; }
+        [Column(TypeName = "date")]
+        public DateTime Дата { get; set; }
 
-        public virtual ВидОплаты ВидОплаты { get; set; }
+        public virtual Склад Склад { get; set; }
 
         public virtual Поставщик Поставщик { get; set; }
 
         public virtual Сотрудник Сотрудник { get; set; }
+
+        public virtual Статус Статус { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ЗаказТовар> ЗаказТовар { get; set; }

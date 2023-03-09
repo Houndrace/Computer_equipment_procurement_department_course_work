@@ -22,11 +22,6 @@ CREATE TABLE Адрес(
     НазваниеАдреса NVARCHAR(100) NOT NULL,
 );
 
-CREATE TABLE ВидОплаты(
-    Код INT IDENTITY(1,1) PRIMARY KEY NOT NULL,
-    Вид NVARCHAR(50) NOT NULL,
-);
-
 CREATE TABLE ЕдиницаИзмерения(
     Код INT IDENTITY(1,1) PRIMARY KEY NOT NULL,
     Наименование NVARCHAR(50) NOT NULL,
@@ -38,6 +33,11 @@ CREATE TABLE Организация(
 );
 
 CREATE TABLE УровеньДоступа(
+    Код INT IDENTITY(1,1) PRIMARY KEY NOT NULL,
+    Название NVARCHAR(30) NOT NULL,
+);
+
+CREATE TABLE Статус(
     Код INT IDENTITY(1,1) PRIMARY KEY NOT NULL,
     Название NVARCHAR(30) NOT NULL,
 );
@@ -87,17 +87,18 @@ CREATE TABLE Склад (
 
 CREATE TABLE Заказ (
     Код INT IDENTITY(1,1) PRIMARY KEY NOT NULL,
+	КодСтатуса INT NOT NULL,
 	КодСотрудника INT NOT NULL,
 	КодПоставщика INT NOT NULL,
 	КодCклада INT NOT NULL,
-	КодВидаОплаты INT NOT NULL,
+	Оплачено BIT NOT NULL,
     Номер NVARCHAR(50) NOT NULL,
 	Дата DATE NOT NULL,
 
 	FOREIGN KEY (КодСотрудника) REFERENCES Сотрудник(Код),
+	FOREIGN KEY (КодСтатуса) REFERENCES Статус(Код),
 	FOREIGN KEY (КодПоставщика) REFERENCES Поставщик(Код),
-	FOREIGN KEY (КодCклада) REFERENCES Склад(Код),
-	FOREIGN KEY (КодВидаОплаты) REFERENCES ВидОплаты(Код)
+	FOREIGN KEY (КодCклада) REFERENCES Склад(Код)
 );
 
 CREATE TABLE Товар (
@@ -117,4 +118,6 @@ CREATE TABLE ЗаказТовар (
 
 	FOREIGN KEY (КодЗаказа) REFERENCES Заказ(Код),
 	FOREIGN KEY (КодТовара) REFERENCES Товар(Код)
-)
+);
+
+INSERT [dbo].[ЕдиницаИзмерения] ([Наименование]) VALUES (N'шт.')

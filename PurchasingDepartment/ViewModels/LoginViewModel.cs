@@ -1,6 +1,17 @@
-﻿using PurchasingDepartment.CommonComands;
+﻿using MvvmCross.Commands;
+using MvvmCross.Navigation;
+using MvvmCross.Navigation.EventArguments;
+using MvvmCross.ViewModels;
+using PurchasingDepartment.Models;
 using PurchasingDepartment.Models.ProcurementModel;
 using PurchasingDepartment.Views;
+using System;
+using System.Collections.Generic;
+using System.Data.Entity;
+using System.Linq;
+using System.Reflection;
+using System.Threading;
+using System.Threading.Tasks;
 using System.Web.UI;
 using System.Windows;
 using System.Windows.Controls;
@@ -9,62 +20,60 @@ using System.Windows.Navigation;
 
 namespace PurchasingDepartment.ViewModels
 {
-    public class LoginViewModel : BaseViewModel
+    public class LoginViewModel 
     {
-        // Fields
+       /*#region Fields
+        private string login;
+        private string password;
         private string errorMessage;
-        private readonly Сотрудник employee;
-        public ICommand AuthorizeCommand { get; private set; }
-        // Constuctor
+        private Сотрудник employee;
+
+        #endregion
+
         public LoginViewModel()
         {
-            employee = new Сотрудник();
-            AuthorizeCommand = new RelayCommand(obj =>
+
+            AuthorizeCommand = new MvxCommand(() =>
             {
-                var isUserExists = employee.Authenticate();
-                if (isUserExists)
+                using (var db = new ProcurementModel())
+                {
+                    employee = db.Сотрудник.FirstOrDefault(u => u.Пароль == Password && u.Логин == Login);
+                }
+
+                if (employee != null)
                 {
                     ErrorMessage = "";
-                    MainWindow mainWindow = new MainWindow();
-                    Application.Current.Windows[0].Close();
-                    mainWindow.Show();
+                    //var mainWindowViewModel = new MainWindowViewModel(employee);
+                    //MainWindow mainWindow = new MainWindow() { DataContext = mainWindowViewModel };
+                    //mainWindow.Show();
+                    Application.Current.MainWindow?.Close();
                 }
                 else
                 {
-                    ErrorMessage = "Пользователь или пароль не найден, проверьте данные и повторите попытку.";
+                    ErrorMessage = "Пользователь или пароль не найдены, проверьте данные и повторите попытку.";
                 }
             });
+
         }
 
-        // Properties to be binded
+        #region Properties
+        public IMvxCommand AuthorizeCommand { get; }
         public string Login
         {
-            get => employee.Логин;
-            set
-            {
-                employee.Логин = value;
-                OnPropertyChanged(nameof(Login));
-            }
+            get => login;
+            set => SetProperty(ref login, value);
         }
-
         public string Password
         {
-            get => employee.Пароль;
-            set
-            {
-                employee.Пароль = value;
-                OnPropertyChanged(nameof(Password));
-            }
+            get => password;
+            set => SetProperty(ref password, value);
         }
-
         public string ErrorMessage
         {
             get => errorMessage;
-            set
-            {
-                errorMessage = value;
-                OnPropertyChanged(nameof(ErrorMessage));
-            }
+            set => SetProperty(ref errorMessage, value);
         }
-    }
+        #endregion
+    }*/
+         
 }

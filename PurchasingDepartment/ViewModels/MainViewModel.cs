@@ -1,54 +1,117 @@
-﻿using PurchasingDepartment.CommonComands;
+﻿
+using PurchasingDepartment.CommonComands;
+using PurchasingDepartment.Models;
+using PurchasingDepartment.Models.ProcurementModel;
+using PurchasingDepartment.Views;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.UI;
+using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Input;
+using System.Windows.Navigation;
 
 namespace PurchasingDepartment.ViewModels {
-    internal class MainViewModel : BaseViewModel {
-        // Fields
-        public ICommand UnfoldPlaceOrderPageCommand { get; private set; }
-        public ICommand GoBackCommand { get; private set; }
-        public ICommand GoForwardCommand { get; private set; }
-        // Constuctor
-        public MainViewModel() {
-            UnfoldPlaceOrderPageCommand = new RelayCommand(obj => {
-                
-            });
+    public class MainViewModel 
+    {
+        /*#region Fields
+        private string login;
+        private string password;
+        private string errorMessage;
+        private Сотрудник employee;
 
-            GoBackCommand = new RelayCommand(obj => {
-                var frame = obj as Frame;
-                if (frame != null) {
-                    frame.GoBack();
-                }   
-            }, obj => {
-                var frame = obj as Frame;
-                if (frame != null) {
-                    return frame.CanGoBack;
-                } else {
-                    return false;
-                }
-            });
+        #endregion
 
-            GoForwardCommand = new RelayCommand(obj => {
-                var frame = obj as Frame;
-                if (frame != null) {
-                    frame.GoForward();
-                }
-            }, obj => {
-                var frame = obj as Frame;
-                if (frame != null) {
-                    return frame.CanGoForward;
-                } 
-                else 
-                { 
-                    return false; 
-                }
-            });
+        public LoginWindowViewModel()
+        {
+
+            
+
         }
-        // Properties to be binded
+
+        #region Properties
+        public ICommand AuthorizeCommand { get; }
+        public string Login
+        {
+            get => login;
+            set => SetProperty(ref login, value);
+        }
+        public string Password
+        {
+            get => password;
+            set => SetProperty(ref password, value);
+        }
+        public string ErrorMessage
+        {
+            get => errorMessage;
+            set => SetProperty(ref errorMessage, value);
+        }
+        #endregion
+    
+
+
+
+        private Uri currentPage;
+        public Uri CurrentPage {
+            get => currentPage;
+            set {
+                currentPage = value;
+                OnPropertyChanged(nameof(CurrentPage));
+            }
+        }
+
+        private Сотрудник employee;
+        public Сотрудник Employee
+        {
+            get => employee;
+            set
+            {
+                employee = value;
+                OnPropertyChanged(nameof(Employee));
+            }
+        }
+
+        private string fullName;
+        public string FullName
+        {
+            get => fullName;
+            set
+            {
+                fullName = value;
+                OnPropertyChanged(nameof(FullName));
+            }
+        }
+
+        public ICommand NavigateToPage { get; private set; }
+        public MainWindowViewModel(Сотрудник employee) 
+        {
+            //Employee = employee; разработка
+            using (var db = new ProcurementModel())
+            {
+                Employee = db.Сотрудник.ToList()[0];
+            }
+            FullName = getFullName();
+            NavigateToPage = new RelayCommand(navigateToPage);
+        }
+
+        private void navigateToPage(object obj) 
+        {
+            var navigationService = NavigationService.GetNavigationService(Application.Current.MainWindow);
+            
+            string page = obj as string;
+            Uri uri = new Uri(page, UriKind.Relative);
+            navigationService.Navigate(uri);
+        }
+
+        private string getFullName()
+        {
+            return Employee.Фамилия + " " + Employee.Имя + " " + Employee.Отчество;
+        }*/
     }
 }

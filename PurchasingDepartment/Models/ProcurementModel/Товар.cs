@@ -17,8 +17,6 @@ namespace PurchasingDepartment.Models.ProcurementModel
         [Key]
         public int Код { get; set; }
 
-        public int КодCклада { get; set; }
-
         public int КодЕденицыИзмерения { get; set; }
 
         [Required]
@@ -33,7 +31,5 @@ namespace PurchasingDepartment.Models.ProcurementModel
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ЗаказТовар> ЗаказТовар { get; set; }
-
-        public virtual Склад Склад { get; set; }
     }
 }
