@@ -1,5 +1,4 @@
 ﻿using ProcurementDepartment.Models.ProcurementModel;
-using ProcurementDepartment.ViewModels;
 using ProcurementDepartment.Views;
 using System;
 using System.Collections.Generic;

@@ -72,8 +72,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Converters\MeasureUnitCodeToMeasureUnitConverter.cs" />
-    <Compile Include="Converters\MeasureUnitCodeToNameConverter.cs" />
+    <Compile Include="Converters\IndexConverter.cs" />
     <Compile Include="Models\ProcurementModel\ProcurementModel.cs" />
     <Compile Include="Models\ProcurementModel\Адрес.cs" />
     <Compile Include="Models\ProcurementModel\Должность.cs" />
@@ -89,18 +88,17 @@
     <Compile Include="Models\ProcurementModel\УровеньДоступа.cs" />
     <Compile Include="Models\ProcurementModel\ЭлектроннаяПочта.cs" />
     <Compile Include="Validators\Validator.cs" />
-    <Compile Include="ViewModels\LoginViewModel.cs" />
-    <Compile Include="ViewModels\MainViewModel.cs" />
-    <Compile Include="ViewModels\OrderCreatingViewModel.cs" />
-    <Compile Include="ViewModels\OrdersViewModel.cs" />
+    <Compile Include="Views\EditOrderPage.xaml.cs">
+      <DependentUpon>EditOrderPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\LoginWindow.xaml.cs">
       <DependentUpon>LoginWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\OrderCreatingPage.xaml.cs">
-      <DependentUpon>OrderCreatingPage.xaml</DependentUpon>
+    <Compile Include="Views\CreateOrderPage.xaml.cs">
+      <DependentUpon>CreateOrderPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\OrdersPage.xaml.cs">
       <DependentUpon>OrdersPage.xaml</DependentUpon>
@@ -113,9 +111,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controls\BindablePasswordBox.xaml.cs">
-      <DependentUpon>BindablePasswordBox.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Controls\CustomTitleBar.xaml.cs">
       <DependentUpon>CustomTitleBar.xaml</DependentUpon>
     </Compile>
@@ -147,10 +142,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Page Include="Controls\BindablePasswordBox.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Controls\CustomTitleBar.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -163,6 +154,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\EditOrderPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\LoginWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -171,7 +166,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\OrderCreatingPage.xaml">
+    <Page Include="Views\CreateOrderPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

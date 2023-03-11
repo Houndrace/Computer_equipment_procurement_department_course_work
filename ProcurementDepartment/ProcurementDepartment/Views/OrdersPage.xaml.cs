@@ -37,7 +37,7 @@ namespace ProcurementDepartment.Views
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            _frame.Navigate(new OrderCreatingPage(_frame, _employee));
+            _frame.Navigate(new CreateOrderPage(_frame, _employee));
         }
 
 
